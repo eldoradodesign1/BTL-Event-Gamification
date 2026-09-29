@@ -32,7 +32,7 @@ document.body.appendChild(authRoot);
 const renderLogin = (error = "") => {
   authRoot.innerHTML = `
     <form class="btl-auth-card" id="btl-login-form">
-      <div class="btl-auth-brand"><img src="./btl-play-icon.png" alt=""><div><strong>BTL<span>Play</span></strong><div style="font-size:11px;color:#8d91a2">Conference control room</div></div></div>
+      <div class="btl-auth-brand"><img src="./btl-play-icon.svg" alt=""><div><strong>BTL<span>Play</span></strong><div style="font-size:11px;color:#8d91a2">Conference control room</div></div></div>
       <h1>Bienvenue.</h1>
       <p>Connectez-vous avec votre numéro de téléphone professionnel.</p>
       <div class="btl-auth-field"><label>Numéro de téléphone</label><input id="btl-phone" inputmode="tel" autocomplete="username" placeholder="+243..." required></div>
