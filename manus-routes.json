@@ -1,0 +1,8 @@
+{
+  "routes": [
+    { "path": "/", "title": "Accueil BTL Play" },
+    { "path": "/participant", "title": "Espace participant" },
+    { "path": "/organisateur", "title": "Espace organisateur" },
+    { "path": "/intervenant", "title": "Espace intervenant" }
+  ]
+}
