@@ -1,0 +1,1 @@
+export default{logoUrl:"/btl-play-icon.svg"};
