@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#161925" />
     <meta name="description" content="BTL Play — l'expérience live des conférences BTL." />
-    <link rel="icon" type="image/png" href="./btl-play-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="./btl-play-icon.svg" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <title>BTL Play — Conference control room</title>
     <link rel="stylesheet" crossorigin href="./assets/index-TJGosIeh.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).catch(() => {});
+      }
+    </script>
     <script type="module" src="./boot.js"></script>
   </body>
 </html>
