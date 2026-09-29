@@ -1,1 +1,11 @@
-import{defineConfig}from"vite";import react from"@vitejs/plugin-react";export default defineConfig({base:"/BTL-Event-Gamification/",plugins:[react()],server:{host:"0.0.0.0",port:3000}});
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig(({ mode }) => ({
+  base: mode === "github-pages" ? "/BTL-Event-Gamification/" : "/",
+  plugins: [react()],
+  server: {
+    host: "0.0.0.0",
+    port: 3000,
+  },
+}));

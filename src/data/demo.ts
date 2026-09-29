@@ -1,1 +1,127 @@
-export type Role="participant"|"organizer"|"speaker";export type ModuleKey="overview"|"quiz"|"raffle"|"qa";export type QuestionStatus="pending"|"approved"|"rejected";export type Speaker={id:string;name:string;role:string;initials:string;color:string;questionCount:number};export type Participant={id:string;name:string;ticket:string;initials:string;color:string;city:string};export type QuizQuestion={id:string;category:string;text:string;options:string[];answer:number;points:number};export type QAQuestion={id:string;text:string;speakerId:string;author:string;time:string;status:QuestionStatus};export const event={title:"BTL Connect · Future Forward",shortTitle:"Future Forward",date:"12 octobre 2026",venue:"Pullman Grand Hôtel · Kinshasa",room:"Salle Horizon",attendees:284,progress:68};export const speakers:Speaker[]=[{id:"s1",name:"Nadia Ilunga",role:"Stratégie & impact",initials:"NI",color:"coral",questionCount:8},{id:"s2",name:"Fabrice Kanku",role:"Créativité terrain",initials:"FK",color:"mint",questionCount:5},{id:"s3",name:"Maya Tshibanda",role:"Expérience client",initials:"MT",color:"lilac",questionCount:3}];export const participants:Participant[]=[{id:"p1",name:"Aïcha Mbuyi",ticket:"083",initials:"AM",color:"lilac",city:"Kinshasa"},{id:"p2",name:"David Kabasele",ticket:"117",initials:"DK",color:"mint",city:"Lubumbashi"},{id:"p3",name:"Esther Lunda",ticket:"204",initials:"EL",color:"coral",city:"Kinshasa"},{id:"p4",name:"Patrick Moke",ticket:"262",initials:"PM",color:"sand",city:"Goma"},{id:"p5",name:"Sarah Iloki",ticket:"319",initials:"SI",color:"sky",city:"Kinshasa"}];export const quizQuestions:QuizQuestion[]=[{id:"q1",category:"Culture & impact",text:"Quel est le premier réflexe d’une équipe BTL face à un nouveau terrain ?",options:["Observer avant d’agir","Lancer la campagne immédiatement","Attendre le brief final","Changer tous les outils"],answer:0,points:250},{id:"q2",category:"Expérience client",text:"Dans une activation réussie, qu’est-ce qui crée le plus de mémorisation ?",options:["La répétition","Le moment vécu","Le volume sonore","La longueur du discours"],answer:1,points:300},{id:"q3",category:"Future Forward",text:"Quelle donnée aide le mieux à améliorer l’expérience pendant l’événement ?",options:["La météo","Le nombre de slides","Le feedback en direct","La couleur des badges"],answer:2,points:350}];export const initialQuestions:QAQuestion[]=[{id:"qa1",text:"Comment mesurez-vous l’impact d’une activation au-delà du nombre de visiteurs ?",speakerId:"s1",author:"Invité anonyme",time:"Il y a 2 min",status:"pending"},{id:"qa2",text:"Quel est le meilleur moment pour embarquer les équipes terrain ?",speakerId:"s2",author:"Aïcha M.",time:"Il y a 5 min",status:"pending"},{id:"qa3",text:"Comment conserver une expérience humaine quand tout devient mesurable ?",speakerId:"s3",author:"David K.",time:"Il y a 8 min",status:"approved"},{id:"qa4",text:"Quel rôle la créativité joue-t-elle dans la fidélisation ?",speakerId:"s1",author:"Sarah I.",time:"Il y a 12 min",status:"pending"}];export const roleMeta:Record<Role,{label:string;path:string}>={participant:{label:"Participant",path:"/participant"},organizer:{label:"Organisateur",path:"/organisateur"},speaker:{label:"Intervenant",path:"/intervenant"}};export const moduleMeta={quiz:{label:"Quiz live",kicker:"01 · Jouer ensemble",description:"3 questions · 45 sec"},raffle:{label:"Tombola",kicker:"02 · Le moment chance",description:"1 ticket · 1 gagnant"},qa:{label:"Questions / réponses",kicker:"03 · Prendre la parole",description:"File modérée en direct"}};
+export type Role = "participant" | "organizer" | "speaker";
+export type ModuleKey = "overview" | "quiz" | "raffle" | "qa";
+export type QuestionStatus = "pending" | "approved" | "rejected";
+
+export type Speaker = {
+  id: string;
+  name: string;
+  role: string;
+  initials: string;
+  color: string;
+  questionCount: number;
+};
+
+export type Participant = {
+  id: string;
+  name: string;
+  ticket: string;
+  initials: string;
+  color: string;
+  city: string;
+};
+
+export type QuizQuestion = {
+  id: string;
+  category: string;
+  text: string;
+  options: string[];
+  answer: number;
+  points: number;
+};
+
+export type QAQuestion = {
+  id: string;
+  text: string;
+  speakerId: string;
+  author: string;
+  time: string;
+  status: QuestionStatus;
+};
+
+export const event = {
+  title: "BTL Connect · Future Forward",
+  shortTitle: "Future Forward",
+  date: "12 octobre 2026",
+  venue: "Pullman Grand Hôtel · Kinshasa",
+  room: "Salle Horizon",
+  attendees: 284,
+  progress: 68,
+};
+
+export const speakers: Speaker[] = [
+  { id: "s1", name: "Nadia Ilunga", role: "Stratégie & impact", initials: "NI", color: "coral", questionCount: 8 },
+  { id: "s2", name: "Fabrice Kanku", role: "Créativité terrain", initials: "FK", color: "mint", questionCount: 5 },
+  { id: "s3", name: "Maya Tshibanda", role: "Expérience client", initials: "MT", color: "lilac", questionCount: 3 },
+];
+
+export const participants: Participant[] = [
+  { id: "p1", name: "Aïcha Mbuyi", ticket: "083", initials: "AM", color: "lilac", city: "Kinshasa" },
+  { id: "p2", name: "David Kabasele", ticket: "117", initials: "DK", color: "mint", city: "Lubumbashi" },
+  { id: "p3", name: "Esther Lunda", ticket: "204", initials: "EL", color: "coral", city: "Kinshasa" },
+  { id: "p4", name: "Patrick Moke", ticket: "262", initials: "PM", color: "sand", city: "Goma" },
+  { id: "p5", name: "Sarah Iloki", ticket: "319", initials: "SI", color: "sky", city: "Kinshasa" },
+];
+
+export const quizQuestions: QuizQuestion[] = [
+  {
+    id: "q1",
+    category: "Culture & impact",
+    text: "Quel est le premier réflexe d’une équipe BTL face à un nouveau terrain ?",
+    options: ["Observer avant d’agir", "Lancer la campagne immédiatement", "Attendre le brief final", "Changer tous les outils"],
+    answer: 0,
+    points: 250,
+  },
+  {
+    id: "q2",
+    category: "Expérience client",
+    text: "Dans une activation réussie, qu’est-ce qui crée le plus de mémorisation ?",
+    options: ["La répétition", "Le moment vécu", "Le volume sonore", "La longueur du discours"],
+    answer: 1,
+    points: 300,
+  },
+  {
+    id: "q3",
+    category: "Future Forward",
+    text: "Quelle donnée aide le mieux à améliorer l’expérience pendant l’événement ?",
+    options: ["La météo", "Le nombre de slides", "Le feedback en direct", "La couleur des badges"],
+    answer: 2,
+    points: 350,
+  },
+];
+
+export const initialQuestions: QAQuestion[] = [
+  { id: "qa1", text: "Comment mesurez-vous l’impact d’une activation au-delà du nombre de visiteurs ?", speakerId: "s1", author: "Invité anonyme", time: "Il y a 2 min", status: "pending" },
+  { id: "qa2", text: "Quel est le meilleur moment pour embarquer les équipes terrain ?", speakerId: "s2", author: "Aïcha M.", time: "Il y a 5 min", status: "pending" },
+  { id: "qa3", text: "Comment conserver une expérience humaine quand tout devient mesurable ?", speakerId: "s3", author: "David K.", time: "Il y a 8 min", status: "approved" },
+  { id: "qa4", text: "Quel rôle la créativité joue-t-elle dans la fidélisation ?", speakerId: "s1", author: "Sarah I.", time: "Il y a 12 min", status: "pending" },
+];
+
+export const roleMeta: Record<Role, { label: string; eyebrow: string; title: string; description: string; path: string }> = {
+  participant: {
+    label: "Participant",
+    eyebrow: "Mon expérience",
+    title: "Votre moment commence maintenant.",
+    description: "Jouez, gagnez et prenez la parole pendant la conférence.",
+    path: "/participant",
+  },
+  organizer: {
+    label: "Organisateur",
+    eyebrow: "Control room",
+    title: "Gardez le rythme de la salle.",
+    description: "Pilotez chaque interaction depuis une seule vue.",
+    path: "/organisateur",
+  },
+  speaker: {
+    label: "Intervenant",
+    eyebrow: "Votre scène",
+    title: "Les bonnes questions, au bon moment.",
+    description: "Préparez vos réponses et faites vivre le dialogue.",
+    path: "/intervenant",
+  },
+};
+
+export const moduleMeta: Record<Exclude<ModuleKey, "overview">, { label: string; kicker: string; description: string }> = {
+  quiz: { label: "Quiz live", kicker: "01 · Jouer ensemble", description: "3 questions · 45 sec" },
+  raffle: { label: "Tombola", kicker: "02 · Le moment chance", description: "1 ticket · 1 gagnant" },
+  qa: { label: "Questions / réponses", kicker: "03 · Prendre la parole", description: "File modérée en direct" },
+};

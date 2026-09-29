@@ -1,7 +1,31 @@
 # BTL Play — Prototype conférence
 
-Version basée sur la proposition Manus, avec Participant / Organisateur / Intervenant, Quiz, Tombola, Q&R et Mode scène.
+Ébauche interactive de l’application de gamification de conférences BTL.
 
-`pnpm install && pnpm dev`
+## Inclus
 
-Supabase sera branché lors de l’étape suivante.
+- Espaces Participant, Organisateur et Intervenant
+- Quiz QCM chronométré avec retour de réponse
+- Inscription et tirage animé de tombola
+- QR code et formulaire de questions/réponses
+- File de modération organisateur
+- Données fictives séparées dans `src/data/demo.ts`
+- Route manifest Web Dev dans `public/manus-routes.json`
+
+## Lancer le projet
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Puis ouvrir `http://localhost:3000`.
+
+## Vérifications
+
+```bash
+pnpm check
+pnpm build
+```
+
+Supabase n’est pas connecté dans cette version. Les contrats de données sont organisés pour permettre son branchement lors de la prochaine étape.
