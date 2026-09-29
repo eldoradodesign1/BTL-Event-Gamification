@@ -113,8 +113,14 @@ function ProgressRing({ value }: { value: number }) {
   return <div className="progress-ring" style={{ "--progress": `${value * 3.6}deg` } as React.CSSProperties}><span>{value}<small>%</small></span></div>;
 }
 
-function App() {
-  const [role, setRole] = useState<Role>(() => roleFromPath(window.location.pathname));
+type AppProps = {
+  currentUser: { fullName: string; phone: string; canSimulate: boolean };
+  onSignOut: () => void;
+};
+
+function App({ currentUser, onSignOut }: AppProps) {
+  const [role, setRole] = useState<Role>("organizer");
+  const [sceneMode, setSceneMode] = useState(false);
   const [activeModule, setActiveModule] = useState<ModuleKey>("overview");
   const [toast, setToast] = useState<Toast>(null);
   const [quizStarted, setQuizStarted] = useState(false);
@@ -135,6 +141,14 @@ function App() {
   const currentQuestion = quizQuestions[quizIndex];
   const pendingQuestions = questions.filter((question) => question.status === "pending");
   const selectedSpeakerDetails = speakers.find((speaker) => speaker.id === selectedSpeaker) ?? speakers[0];
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSceneMode(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   useEffect(() => {
     const onPopState = () => {
@@ -269,7 +283,7 @@ function App() {
     return <OrganizerView activeModule={activeModule} onSelectModule={selectModule} isQuizLive={quizStarted} onToggleQuiz={() => { setQuizStarted((current) => !current); setToast({ tone: "info", message: quizStarted ? "Quiz mis en pause." : "Quiz live lancé dans la salle." }); }} isDrawing={isDrawing} drawingNumber={drawingNumber} raffleWinner={raffleWinner} onDrawRaffle={drawRaffle} questions={questions} pendingQuestions={pendingQuestions} onModerateQuestion={moderateQuestion} />;
   };
 
-  return <div className={`app-shell role-${role}`}>
+  return <div className={`app-shell role-${role} ${sceneMode ? "scene-mode" : ""}`}>
     <aside className="sidebar">
       <div className="brand-lockup">
         <img src={`${import.meta.env.BASE_URL}btl-play-mark.svg`} alt="" className="brand-mark" />
@@ -288,7 +302,7 @@ function App() {
       </nav>
       <div className="sidebar-bottom">
         <button className="nav-item"><Settings2 size={18} /><span>Paramètres</span></button>
-        <div className="profile-mini"><Avatar initials={role === "participant" ? "AM" : role === "organizer" ? "EB" : "NI"} color="lilac" size="small" /><span><strong>{role === "participant" ? "Aïcha Mbuyi" : role === "organizer" ? "Eldo B." : "Nadia Ilunga"}</strong><small>{roleMeta[role].label}</small></span><ChevronRight size={15} /></div>
+        <div className="profile-mini"><Avatar initials={currentUser.fullName.split(/\s+/).map((part) => part[0]).join("").slice(0,2).toUpperCase()} color="lilac" size="small" /><span><strong>{currentUser.fullName}</strong><small>Organisateur · Superadmin</small></span><ChevronRight size={15} /></div>
       </div>
     </aside>
     <main className="main-content">
@@ -297,7 +311,9 @@ function App() {
         <div className="top-actions">
           <span className="topbar-event"><Radio size={14} /> Salle Horizon · 284 participants</span>
           <button className="icon-button" aria-label="Notifications"><Bell size={17} /><i /></button>
-          <div className="role-switcher"><span>Voir comme</span>{roleOrder.map((item) => <button key={item} onClick={() => switchRole(item)} className={role === item ? "role-selected" : ""}>{roleMeta[item].label}</button>)}</div>
+          {currentUser.canSimulate && <div className="role-switcher"><span>Voir comme</span>{roleOrder.map((item) => <button key={item} onClick={() => switchRole(item)} className={role === item ? "role-selected" : ""}>{roleMeta[item].label}</button>)}</div>}
+          <button className={`icon-button scene-trigger ${sceneMode ? "scene-trigger-active" : ""}`} onClick={() => setSceneMode((current) => !current)} aria-label={sceneMode ? "Quitter le mode scène" : "Activer le mode scène"} title={sceneMode ? "Quitter le mode scène" : "Mode scène"}><MonitorPlay size={17} /></button>
+          <button className="icon-button" aria-label="Se déconnecter" onClick={onSignOut}><ShieldCheck size={17} /></button>
           <button className="mobile-menu icon-button" aria-label="Ouvrir le menu"><Menu size={19} /></button>
         </div>
       </header>
