@@ -1,0 +1,13 @@
+{
+  "name": "BTL Play — Conference Control Room",
+  "short_name": "BTL Play",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#161925",
+  "theme_color": "#161925",
+  "description": "L'expérience live des conférences BTL.",
+  "icons": [
+    { "src": "./btl-play-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
