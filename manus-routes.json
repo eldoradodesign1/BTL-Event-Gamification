@@ -1,8 +1,20 @@
 {
   "routes": [
-    { "path": "/", "title": "Accueil BTL Play" },
-    { "path": "/participant", "title": "Espace participant" },
-    { "path": "/organisateur", "title": "Espace organisateur" },
-    { "path": "/intervenant", "title": "Espace intervenant" }
+    { "path": "/", "title": "Accueil BTL Live" },
+    { "path": "/join", "title": "Inscription participant" },
+    { "path": "/p/quiz", "title": "Quiz participant" },
+    { "path": "/p/tombola", "title": "Tombola participant" },
+    { "path": "/p/qa", "title": "Questions participant" },
+    { "path": "/admin", "title": "Tableau de bord organisateur" },
+    { "path": "/admin/quiz", "title": "Pilotage du quiz" },
+    { "path": "/admin/tombola", "title": "Pilotage de la tombola" },
+    { "path": "/admin/qa", "title": "Modération questions/réponses" },
+    { "path": "/iv", "title": "Accès intervenant" },
+    { "path": "/iv/:id", "title": "Questions intervenant" },
+    { "path": "/iv/:id/slides", "title": "Slides intervenant" },
+    { "path": "/screen/quiz", "title": "Écran quiz" },
+    { "path": "/screen/tombola", "title": "Écran tombola" },
+    { "path": "/screen/qa", "title": "Écran questions/réponses" },
+    { "path": "/screen/slides", "title": "Écran slides" }
   ]
 }
