@@ -1,29 +1,26 @@
-# BTL Play — Prototype conférence
+# BTL Live — Prototype conférence
 
-Application de gamification de conférences BTL avec accès organisateur, quiz, tombola et questions/réponses.
+Prototype de gamification de conférences BTL avec quatre accès : **participant**, **intervenant**, **organisateur** et **écran / projection**.
 
-## Inclus
+## Parcours inclus
 
-- Authentification organisateur par numéro de téléphone et mot de passe via Supabase Auth
-- 12 comptes administratifs actifs : `admin`, `sub_admin`, `super_admin` et `supervisor`
-- Espaces Participant, Organisateur et Intervenant
-- Quiz QCM chronométré
-- Inscription et tirage animé de tombola
-- QR code et formulaire de questions/réponses
-- File de modération organisateur
+- **Participant** : inscription par QR d’entrée avec nom et photo facultative, compte éphémère lié à l’Event, quiz chronométré, inscription à la tombola et questions/réponses par QR.
+- **Intervenant** : accès lié à l’Event, questions validées destinées à l’intervenant, mise à l’antenne et espace **Slides** pour renseigner un PPTX et piloter un deck slide par slide.
+- **Organisateur** : connexion par téléphone/mot de passe via Supabase Auth, tableau de bord, participants, intervenants, statistiques, quiz, tombola, modération Q/R et suivi du deck scène.
+- **Écran** : vues projection quiz, tombola, Q/R et slides ; QR en grand pour rejoindre l’activité ; synchronisation d’affichage toutes les 5 secondes ; question à l’antenne avec photo du participant ; tirage animé avec bouton de lancement et confettis.
 
-## Données et authentification
+## Données de démonstration
 
-- Le projet Supabase de destination est configuré dans `src/lib/supabase.ts` et `public/boot.js`.
-- Les 12 administratifs de la source sont enregistrés dans `public.organizer_roster` avec leur nom, téléphone et rôle d’origine.
-- Les 12 comptes existent dans Supabase Auth, leurs profils sont actifs et leur roster est en statut `active`.
-- L’authentification téléphone par mot de passe est activée dans Supabase ; aucun fournisseur SMS n’est nécessaire pour ce parcours.
-- Les mots de passe existants ont été importés côté serveur sous forme de hash bcrypt dans Supabase Auth. Ils ne sont pas exposés dans le frontend, le dépôt ou les logs.
-- Les numéros doivent être saisis au format international, par exemple `+243821000008`.
+Le prototype utilise des données fictives et synchronise les onglets via `BroadcastChannel` + `localStorage`. La couche `BTL.store` est conçue pour être remplacée par Supabase Database/Realtime sans réécrire les vues.
 
-La migration `supabase/migrations/20260929181210_add_profile_password_change_state.sql` ajoute l’état de changement de mot de passe attendu par les profils Auth.
+Les participants sont marqués avec une durée de conservation de démonstration de 2 jours. Les intervenants et le deck sont attachés à l’Event et affichent une date d’expiration / un état de fichier pour préparer la future gestion Supabase.
 
-Les contenus de conférence (questions, participants, intervenants et tombola) restent des données de démonstration dans `src/data/demo.ts` jusqu’au branchement des tables métier.
+## Authentification organisateur
+
+- La connexion organisateur se déclenche uniquement sur `#/admin` et `#/admin/*`.
+- Les participants, intervenants et écrans ne sont pas bloqués par cette garde dans le prototype.
+- Le projet Supabase de destination est configuré dans `public/boot.js` avec un accès Auth téléphone/mot de passe et une vérification de `public.organizer_roster`.
+- Les 12 comptes administratifs actifs restent gérés dans Supabase ; aucun mot de passe n’est stocké dans ce dépôt.
 
 ## Lancer le projet
 
@@ -38,5 +35,7 @@ Puis ouvrir `http://localhost:3000`.
 
 ```bash
 pnpm check
-pnpm build
+pnpm build --mode github-pages
 ```
+
+Le build GitHub Pages utilise le mode `github-pages` et le chemin `/BTL-Event-Gamification/`.
